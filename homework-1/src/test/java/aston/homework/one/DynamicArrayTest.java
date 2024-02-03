@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// тесты тоже хорошие, разве что к нэймингу можно докопаться, но это мелочи
 class DynamicArrayTest {
 
     private DynamicArray<Integer> dynamicArray;
@@ -22,7 +23,7 @@ class DynamicArrayTest {
         dynamicArray.add(123);
         dynamicArray.add(456);
 
-        assertEquals(2, dynamicArray.size());
+        assertEquals(2, dynamicArray.size()); // когда много ассертов их надо вставлять в assertAll
         assertEquals(123, dynamicArray.get(0));
         assertEquals(456, dynamicArray.get(1));
     }
