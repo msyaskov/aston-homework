@@ -25,6 +25,7 @@ import java.util.NoSuchElementException;
  * @author Максим Яськов
  * @see Array
  */
+// На самом деле очень хорошо, молодец, хорошо постарался!
 
 public class DynamicArray<E> implements Array<E> {
 
@@ -44,6 +45,7 @@ public class DynamicArray<E> implements Array<E> {
      * Минимальная емкость, используемая при первом добавлении элемента, при условии нулевой емкости перед увеличением.
      */
     private static final int MIN_CAPACITY = 10;
+    public static final String CAPACITY_ERR_MSG = "InitialCapacity must not be negative, but: %d";
 
     /**
      * Счетчик модификаций массива. спользуется итератором.
@@ -75,7 +77,7 @@ public class DynamicArray<E> implements Array<E> {
      */
     public DynamicArray(int initialCapacity) {
         if (initialCapacity < 0) {
-            throw new IllegalArgumentException("InitialCapacity must not be negative, but: " + initialCapacity);
+            throw new IllegalArgumentException(Strong.format(CAPACITY_ERR_MSG, initialCapacity));
         }
 
         if (initialCapacity == 0) {
@@ -128,7 +130,7 @@ public class DynamicArray<E> implements Array<E> {
      */
     private void checkIndexForAdd(int index) {
         if (index < 0 || size < index) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size); // тут тоже нужно отформатировать сообщение и вынести его в константу
         }
     }
 
