@@ -3,6 +3,9 @@ package aston.homework.one;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+import java.util.stream.IntStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DynamicArrayTest {
@@ -132,5 +135,40 @@ class DynamicArrayTest {
         array = dynamicArray.toArray(intArray);
         assertSame(array, intArray);
         assertArrayEquals(new Integer[]{123, 456}, array);
+    }
+
+    @Test
+    public void testSort() {
+//        ручная проверка
+//        DynamicArray<Integer> array = dynamicArrayOf(6,-4,5,1,-7,23,-19,0);
+//        testCase(array);
+//        System.out.println(array);
+
+        // тестирования сортировки на случайных массивах
+        for (int i = 0; i < 1000; i += 3) {
+            testCase(dynamicArrayOf(randomInts(i, i)));
+        }
+    }
+
+    private void testCase(DynamicArray<Integer> dynamicArray) {
+        dynamicArray.sort(Integer::compareTo);
+
+        for (int i = 0; i < dynamicArray.size() - 1; i++) {
+            assertTrue(dynamicArray.get(i) <= dynamicArray.get(i + 1));
+        }
+    }
+
+    private <E> DynamicArray<E> dynamicArrayOf(E... elements) {
+        DynamicArray<E> array = new DynamicArray<>(elements.length);
+        for (E element : elements) {
+            array.add(element);
+        }
+
+        return array;
+    }
+
+    private Integer[] randomInts(int bound, int length) {
+        Random random = new Random(1234567890);
+        return IntStream.generate(() -> random.nextInt(bound)).limit(length).boxed().toArray(Integer[]::new);
     }
 }
