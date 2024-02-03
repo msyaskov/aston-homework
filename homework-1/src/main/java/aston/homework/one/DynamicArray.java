@@ -1,6 +1,10 @@
 package aston.homework.one;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Реализация интерфейса {@link Array} с изменяемым размером массива.
