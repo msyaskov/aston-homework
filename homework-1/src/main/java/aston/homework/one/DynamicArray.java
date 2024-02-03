@@ -204,9 +204,10 @@ public class DynamicArray<E> implements Array<E> {
         int minGrowth = requiredCapacity - currentCapacity;
         int preferredGrowth = currentCapacity >> 1;
         int newCapacity = currentCapacity + Math.max(minGrowth, preferredGrowth);
-        if (newCapacity < 0) { // Переполнение возникает из-за слишком большого приращения preferredGrowth.
-            newCapacity = MAX_CAPACITY; // В таком случае новая емкость равна максимально возможной.
-        } else if (MAX_CAPACITY < newCapacity) {
+        if (newCapacity < 0 || MAX_CAPACITY < newCapacity) {
+            // Если возникает переполнение из-за слишком большого приращения preferredGrowth,
+            // то новая емкость устанавливается максимально возможной.
+            // Если новая емкость больше максимально возможной, то она приравнивается к максимальной.
             newCapacity = MAX_CAPACITY;
         }
 
